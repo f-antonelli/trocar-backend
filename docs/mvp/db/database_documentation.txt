@@ -1,0 +1,22 @@
+Database documentation
+
+Productos: Se divido las entidades de los productos en 4: Producto, Categorias, Atributos, y Atributo de Productos. Debido a que existen productos fisicos y servicios, y no todos tienen los mismos campos de valores (por ejemplo: la ropa tiene talle, color, etc. y un servicio no deberia tenerlos).
+Para no perder la consistencia de los datos, se separa y se consumen los datos mediante joins.
+
+---
+
+Usuarios: Para el caso de la creacion de usuario, se particiona en 3 tablas. Ya que existen datos irrelevantes a la hora de utilizar la aplicacion en distintos workflows, seria innecesario estar llamando constantemente a la db y trayendo datos de mas, como la direccion del cliente.
+Por ello se dejan los datos mas necesarios para la web en la entidad principal, y mediante FK se puede consumir los datos restantes.
+
+---
+
+Proceso de intercambio: 
+- Usuario elige un producto
+- Chatea con el vendedor
+- Solicita intercambio enviandole el producto deseado, fecha de encuentro y punto de encuentro
+- El vendedor visualiza el pedido de intercambio y le envia el producto deseado
+- El comprador (primer solicitante) acepta intercambio
+- Intercambio aceptado se incia el intercambio y se pacta fecha de entrega
+- Se entrega el producto
+ 
+Aca se utilizaria la entidad de Orden con el fin de crear todos los datos necesario para el intercambio, una vez concluido esto. Se migra la data limpia a la entidad de Intercambio, a modo de logeo y tener un trackeo mejor y limpio de los intercambios realizados en la web.
