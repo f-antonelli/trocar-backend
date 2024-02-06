@@ -1,9 +1,9 @@
 {
-  "name": "trocar_mvp",
+  "name": "user_service",
   "version": "0.1.0",
   "description": "Trocar is a platform that facilitates the exchange of goods and services between neighboring users.",
   "bin": {
-    "trocar_mvp": "bin/trocar_mvp.js"
+    "user_service": "bin/user_service.js"
   },
   "keywords": [
     "serverless",

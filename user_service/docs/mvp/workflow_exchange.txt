@@ -1,9 +1,0 @@
-Workflow Exchange ( camino feliz )
-
-- Usuario elige un producto
-- Chatea con el vendedor
-- Solicita intercambio enviandole el producto deseado, fecha de encuentro y punto de encuentro
-- El vendedor visualiza el pedido de intercambio y le envia el producto deseado
-- El comprador (primer solicitante) acepta intercambio
-- Intercambio aceptado se incia el intercambio y se pacta fecha de entrega
-- Se entrega el producto
