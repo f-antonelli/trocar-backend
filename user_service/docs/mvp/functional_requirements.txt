@@ -1,0 +1,13 @@
+Functional requirements
+
+- Registro de usuario
+- Login de usuario
+- Publicación de bienes y servicios
+- Categorias de productos
+- Lista de deseos, o sea productos favoritos
+- Búsqueda y filtrado
+- Mensajería interna
+- Calificaciones y reseñas
+- Notificaciones
+- Gestión de perfiles
+- Sistema de reportes/soporte

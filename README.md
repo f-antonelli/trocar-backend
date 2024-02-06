@@ -1,14 +1,10 @@
-# Welcome to your CDK TypeScript project
+# Trocar API
 
-This is a blank project for CDK development with TypeScript.
+Trocar is a platform that facilitates the exchange of goods and services between neighboring users. Our platform aims to create a collaborative community where users can easily exchange objects and services, promoting reuse, recycling and waste reduction.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Backend Architecture
+![Backend Architecture](./docs/mvp/aws_architecture_v1.png)
 
-## Useful commands
+## Tech Stack
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+**Server:** Typescript, Node.js, Express framework, PostgreSQL, Prisma ORM, Docker ( run locally DB ), CDK AWS, SDK AWS, Jest
