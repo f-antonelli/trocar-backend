@@ -28,7 +28,7 @@ export class ApiGatewayStack extends Construct {
     const apgw = new aws_apigateway.RestApi(this, `${serviceName}-ApiGtw`);
 
     this.createEndpoints(userService, apgw, {
-      name: "user",
+      name: "users",
       methods: ["GET", "POST"],
       child: {
         name: "{id}",

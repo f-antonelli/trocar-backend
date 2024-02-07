@@ -1,7 +1,11 @@
-import { UserEntity } from '../../domain/entities/user.entity';
-import { UserRepository } from '../../domain/repositories/user.repository';
+import { PrismaClient } from '@prisma/client';
 
-export class UserRepositoryImpl implements UserRepository {
+import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UserEntity } from '../../domain/entities/user.entity';
+
+const client = new PrismaClient();
+
+export class PgUserDatasource implements UserDatasource {
   create(user: UserEntity): Promise<void> {
     throw new Error('Method not implemented.');
   }

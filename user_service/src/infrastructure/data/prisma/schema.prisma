@@ -21,14 +21,16 @@ model User {
   is_active   Boolean       @default(false)
   username    String
   image_url   String
+  createdAt   DateTime      @default(now())
+  updateAt    DateTime      @updatedAt
   UserData    UserData[]
   UserAddress UserAddress[]
 }
 
 model UserData {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   user_id    Int
-  user       User   @relation(fields: [user_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
   name       String
   surname    String
   phone      String
@@ -38,9 +40,9 @@ model UserData {
 }
 
 model UserAddress {
-  id        Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   user_id   Int
-  user      User   @relation(fields: [user_id], references: [id])
+  user      User     @relation(fields: [user_id], references: [id])
   address_1 String
   address_2 String
   country   String
