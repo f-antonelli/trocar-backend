@@ -1,10 +1,14 @@
+import { UserDatasource } from '../../domain/datasources/user.datasource';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { UserRepository } from '../../domain/repositories/user.repository';
 
 export class UserRepositoryImpl implements UserRepository {
-  create(user: UserEntity): Promise<void> {
-    throw new Error('Method not implemented.');
+  constructor(private readonly userDatasource: UserDatasource) {}
+
+  create(user: UserEntity): Promise<UserEntity> {
+    return this.userDatasource.create(user);
   }
+
   getUsers(id: Number): Promise<UserEntity[]> {
     throw new Error('Method not implemented.');
   }

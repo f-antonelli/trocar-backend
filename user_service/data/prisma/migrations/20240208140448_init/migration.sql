@@ -9,7 +9,9 @@ CREATE TABLE "User" (
     "role" "Role" NOT NULL DEFAULT 'USER',
     "is_active" BOOLEAN NOT NULL DEFAULT false,
     "username" TEXT NOT NULL,
-    "image_url" TEXT NOT NULL,
+    "image_url" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updateAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
