@@ -16,6 +16,8 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
+    "migrate:up": "db-migrate up -m src/infrastructure/data/pg/migrations",
+    "migrate:down": "db-migrate down  -m src/infrastructure/data/pg/migrations",
     "start:dev": "cdk synth && sam.cmd local start-api -t cdk.out/UserServiceStack.template.json",
     "lint": "eslint src/**/*.ts --max-warnings=0"
   },

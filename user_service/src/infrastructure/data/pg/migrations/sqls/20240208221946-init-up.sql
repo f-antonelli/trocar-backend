@@ -34,3 +34,5 @@ CREATE TABLE "user_data" (
     "user_id"     bigint,
     CONSTRAINT "fk_user_data_user_id" FOREIGN KEY ("user_id") REFERENCES "user"("id")
 );
+
+CREATE INDEX ON "user" ("username")
