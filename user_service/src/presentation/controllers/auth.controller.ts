@@ -3,8 +3,7 @@ import { plainToInstance } from 'class-transformer';
 
 import { CreateUserDTO } from '../../domain/dtos/users/create-user.dto';
 import { UserRepository } from '../../domain/repositories/user.repository';
-import { AppValidation } from '../utils/validate';
-import { ErrorResponse } from '../utils/response';
+import { AppValidation, ErrorResponse, SuccessResponse } from '../utils';
 
 export class AuthController {
   constructor(private readonly userRepository: UserRepository) {}
@@ -13,6 +12,8 @@ export class AuthController {
     const input = plainToInstance(CreateUserDTO, JSON.parse(event.body!));
     const error = await AppValidation(input);
     if (error) return ErrorResponse(404, error);
+
+    return SuccessResponse(201, input);
   }
 }
 
