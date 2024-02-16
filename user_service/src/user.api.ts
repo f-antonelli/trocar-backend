@@ -3,10 +3,10 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 
 import { PgUserDatasource } from './infrastructure/datasources/user-pg.datasource';
 import { UserRepositoryImpl } from './infrastructure/repositories/user.repository';
-import { AuthController } from './presentation/controllers/auth.controller';
+import { UserService } from './presentation/services/user.service';
 import { ErrorResponse } from './presentation/utils';
 
-const controller = new AuthController(new UserRepositoryImpl(new PgUserDatasource()));
+const service = new UserService(new UserRepositoryImpl(new PgUserDatasource()));
 
 export const handler = (event: APIGatewayProxyEvent) => {
   const isRoot = event.pathParameters === null;
@@ -14,9 +14,11 @@ export const handler = (event: APIGatewayProxyEvent) => {
   switch (event.httpMethod.toLowerCase()) {
     case 'post':
       if (isRoot) {
-        return controller.CreateUser(event);
+        return service.CreateUser(event);
       }
       break;
+    case 'get':
+      return isRoot ? service.getUsers(event) : service.getUser(event);
   }
 
   return ErrorResponse(404, 'Requested method not allowed!');

@@ -9,11 +9,12 @@ export class UserRepositoryImpl implements UserRepository {
     return this.userDatasource.create(user);
   }
 
-  getUsers(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+  getUsers(limit: number, page: number): Promise<UserEntity[]> {
+    return this.userDatasource.getUsers(limit, page);
   }
-  getUser(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+
+  getUser(id: number): Promise<UserEntity> {
+    return this.userDatasource.getUser(id);
   }
   update(id: Number): Promise<UserEntity[]> {
     throw new Error('Method not implemented.');
