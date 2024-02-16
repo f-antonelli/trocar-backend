@@ -15,6 +15,4 @@ export class CreateUserDTO {
     message: 'Password must have a Uppercase, lowercase letter and a number',
   })
   public password: string;
-
-  public image_url?: string | null;
 }

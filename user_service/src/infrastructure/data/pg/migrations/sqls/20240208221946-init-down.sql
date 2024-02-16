@@ -1,5 +1,5 @@
-DROP TABLE "user_data";
+DROP TABLE "users_data";
 
-DROP TABLE "user_address";
+DROP TABLE "users_address";
 
-DROP TABLE "user";
+DROP TABLE "users";

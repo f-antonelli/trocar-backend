@@ -1,6 +1,6 @@
 CREATE TYPE user_role AS ENUM ('user', 'admin', 'god');
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id"          bigserial PRIMARY KEY,
     "username"    varchar(50) NOT NULL,
     "email"       varchar(50) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE "user" (
     "updated_at"  timestamptz
 );
 
-CREATE TABLE "user_address" (
+CREATE TABLE "users_address" (
     "id"        bigserial PRIMARY KEY,
     "address_1" varchar(100) NOT NULL,
     "address_2" varchar(100) DEFAULT NULL,
@@ -20,10 +20,10 @@ CREATE TABLE "user_address" (
     "zip_code"  varchar(10) NOT NULL,
     "city"      varchar(50) NOT NULL,
     "user_id"   bigint,
-    CONSTRAINT "fk_user_address_user_id" FOREIGN KEY ("user_id") REFERENCES "user"("id")
+    CONSTRAINT "fk_user_address_user_id" FOREIGN KEY ("user_id") REFERENCES "users"("id")
 );
 
-CREATE TABLE "user_data" (
+CREATE TABLE "users_data" (
     "id"          bigserial PRIMARY KEY,
     "name"        varchar(50) NOT NULL,
     "surname"     varchar(50) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE "user_data" (
     "wish_list"   integer[] NOT NULL,
     "references"  integer[] NOT NULL,
     "user_id"     bigint,
-    CONSTRAINT "fk_user_data_user_id" FOREIGN KEY ("user_id") REFERENCES "user"("id")
+    CONSTRAINT "fk_user_data_user_id" FOREIGN KEY ("user_id") REFERENCES "users"("id")
 );
 
-CREATE INDEX ON "user" ("username")
+CREATE INDEX ON "users" ("username")

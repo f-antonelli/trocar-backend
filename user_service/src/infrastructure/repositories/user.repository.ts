@@ -5,7 +5,7 @@ import { UserRepository } from '../../domain/repositories/user.repository';
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly userDatasource: UserDatasource) {}
 
-  create(user: UserEntity): Promise<UserEntity> {
+  create(user: UserEntity): Promise<UserEntity | void> {
     return this.userDatasource.create(user);
   }
 

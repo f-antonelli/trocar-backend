@@ -21,6 +21,8 @@ export class AuthController {
         password: hashedPassword,
       });
 
+      if (!data) return ErrorResponse(500, 'Couldnt create user, please try again.');
+
       return SuccessResponse(201, data);
     } catch (error) {
       console.log(error);
