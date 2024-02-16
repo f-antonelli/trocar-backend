@@ -6,8 +6,6 @@ import { UserRepositoryImpl } from './infrastructure/repositories/user.repositor
 import { AuthController } from './presentation/controllers/auth.controller';
 import { ErrorResponse } from './presentation/utils';
 
-console.log(process.env.PRISMA_CLI_BINARY_TARGETS);
-
 const controller = new AuthController(new UserRepositoryImpl(new PgUserDatasource()));
 
 export const handler = (event: APIGatewayProxyEvent) => {

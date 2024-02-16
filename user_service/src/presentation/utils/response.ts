@@ -40,6 +40,7 @@ export const SuccessResponse = (code = 200, data: object) => {
 };
 
 export const ErrorResponse = (code = 500, error: unknown) => {
+  console.log(error);
   if (Array.isArray(error)) {
     if (error.length > 0 && typeof error[0] === 'object' && 'constraints' in error[0]) {
       const errorMessages = error.map((err: ValidationError) => {
