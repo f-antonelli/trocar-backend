@@ -1,11 +1,14 @@
 import { APIGatewayEvent } from 'aws-lambda';
 
-import { UserRepository } from '../../../domain/repositories/user.repository';
+import { AuthRepository, UserRepository } from '../../../domain/repositories';
 import { IResponse, IUseCase } from '../../../presentation/interfaces';
 import { ErrorResponse, Password, SuccessResponse } from '../../../presentation/utils';
 
 export class VerifyUserUseCase implements IUseCase {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly authRepository: AuthRepository
+  ) {}
 
   public async execute(event: APIGatewayEvent): Promise<IResponse> {
     const token = event.queryStringParameters!.token!;
@@ -17,7 +20,7 @@ export class VerifyUserUseCase implements IUseCase {
       const data = await this.userRepository.GetUserById(+payload.id);
       if (!data) return ErrorResponse(404, 'No user was found with this id.');
 
-      const userVerified = await this.userRepository.UpdateVerifyUser(data.id!);
+      const userVerified = await this.authRepository.UpdateVerifyUser(data.id!);
       if (!userVerified)
         return ErrorResponse(400, 'The user could not be verified. Please request another code.');
 

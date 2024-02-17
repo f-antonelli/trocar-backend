@@ -1,6 +1,6 @@
 import { APIGatewayEvent } from 'aws-lambda';
 
-import { UserRepository } from '../../domain/repositories/user.repository';
+import { AuthRepository, UserRepository } from '../../domain/repositories';
 import { EmailService } from '../../infrastructure/services/email.service';
 import {
   CreateUserUseCase,
@@ -10,16 +10,17 @@ import {
 
 export class AuthController {
   constructor(
+    private readonly authRepository: AuthRepository,
     private readonly userRepository: UserRepository,
     private readonly emailService: EmailService
   ) {}
 
   async CreateUser(event: APIGatewayEvent) {
-    await new CreateUserUseCase(this.userRepository, this.emailService).execute(event);
+    await new CreateUserUseCase(this.authRepository, this.emailService).execute(event);
   }
 
   async VerifyUser(event: APIGatewayEvent) {
-    await new VerifyUserUseCase(this.userRepository).execute(event);
+    await new VerifyUserUseCase(this.userRepository, this.authRepository).execute(event);
   }
 
   async LoginUser(event: APIGatewayEvent) {

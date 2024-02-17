@@ -1,13 +1,14 @@
 import 'reflect-metadata';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 
-import { PgUserDatasource } from './infrastructure/datasources/user-pg.datasource';
-import { UserRepositoryImpl } from './infrastructure/repositories/user.repository';
+import { PgAuthDatasource, PgUserDatasource } from './infrastructure/datasources';
+import { AuthRepositoryImpl, UserRepositoryImpl } from './infrastructure/repositories';
 import { EmailService } from './infrastructure/services/email.service';
-import { AuthController } from './presentation/services/auth.controller';
+import { AuthController } from './presentation/controllers/auth.controller';
 import { ErrorResponse } from './presentation/utils';
 
 const service = new AuthController(
+  new AuthRepositoryImpl(new PgAuthDatasource()),
   new UserRepositoryImpl(new PgUserDatasource()),
   new EmailService()
 );

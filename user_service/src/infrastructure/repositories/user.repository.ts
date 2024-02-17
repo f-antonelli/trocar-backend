@@ -5,10 +5,6 @@ import { UserRepository } from '../../domain/repositories/user.repository';
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly userDatasource: UserDatasource) {}
 
-  Create(user: UserEntity): Promise<UserEntity | void> {
-    return this.userDatasource.Create(user);
-  }
-
   GetUsers(limit: number, page: number): Promise<UserEntity[] | null> {
     return this.userDatasource.GetUsers(limit, page);
   }
@@ -19,10 +15,6 @@ export class UserRepositoryImpl implements UserRepository {
 
   GetUserByEmail(email: string): Promise<UserEntity | null> {
     return this.userDatasource.GetUserByEmail(email);
-  }
-
-  UpdateVerifyUser(userId: number): Promise<UserEntity | null> {
-    return this.userDatasource.UpdateVerifyUser(userId);
   }
 
   update(id: Number): Promise<UserEntity[]> {

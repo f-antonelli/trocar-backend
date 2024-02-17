@@ -2,7 +2,7 @@ import { APIGatewayEvent } from 'aws-lambda';
 import { plainToInstance } from 'class-transformer';
 
 import { CreateUserDTO } from '../../../domain/dtos/users';
-import { UserRepository } from '../../../domain/repositories/user.repository';
+import { AuthRepository } from '../../../domain/repositories/auth.repository';
 import { IResponse, IUseCase } from '../../../presentation/interfaces';
 import {
   AppValidation,
@@ -15,7 +15,7 @@ import { SendEmailVerify } from '../email/send-email-verify';
 
 export class CreateUserUseCase implements IUseCase {
   constructor(
-    private readonly userRepository: UserRepository,
+    private readonly authRepository: AuthRepository,
     private readonly emailService: EmailService
   ) {}
 
@@ -27,7 +27,7 @@ export class CreateUserUseCase implements IUseCase {
 
       const hashedPassword = await Password.GetHashedPassword(input.password);
 
-      const data = await this.userRepository.Create({
+      const data = await this.authRepository.Create({
         ...input,
         password: hashedPassword,
       });
