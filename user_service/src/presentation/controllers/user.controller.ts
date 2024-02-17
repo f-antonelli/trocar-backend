@@ -7,10 +7,10 @@ export class UserController {
   constructor(private readonly userRepository: UserRepository) {}
 
   async GetUsers(event: APIGatewayEvent) {
-    await new GetUsersUseCase(this.userRepository).execute(event);
+    return await new GetUsersUseCase(this.userRepository).execute(event);
   }
 
   async GetUser(event: APIGatewayEvent) {
-    await new GetUserUseCase(this.userRepository).execute(event);
+    return await new GetUserUseCase(this.userRepository).execute(event);
   }
 }

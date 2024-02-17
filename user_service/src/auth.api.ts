@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import { APIGatewayEvent } from 'aws-lambda';
 
 import { PgAuthDatasource, PgUserDatasource } from './infrastructure/datasources';
 import { AuthRepositoryImpl, UserRepositoryImpl } from './infrastructure/repositories';
@@ -13,7 +13,7 @@ const service = new AuthController(
   new EmailService()
 );
 
-export const handler = (event: APIGatewayProxyEvent) => {
+export const handler = (event: APIGatewayEvent) => {
   const isRoot = event.queryStringParameters === null;
 
   switch (event.path) {

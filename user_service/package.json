@@ -14,12 +14,18 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
     "cdk": "cdk",
     "migrate:up": "db-migrate up -m src/infrastructure/data/pg/migrations",
     "migrate:down": "db-migrate down  -m src/infrastructure/data/pg/migrations",
+    "migrate-test:up": "db-migrate up --env test -m src/infrastructure/data/pg/migrations",
+    "migrate-test:down": "db-migrate down --env test -m src/infrastructure/data/pg/migrations",
     "start:dev": "cdk synth && sam.cmd local start-api -t cdk.out/UserServiceStack.template.json",
-    "lint": "eslint src/**/*.ts --max-warnings=0"
+    "lint": "eslint src/**/*.ts --max-warnings=0",
+    "docker:dev": "docker compose up -d",
+    "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d",
+    "test": "npm run docker:test && jest",
+    "test:watch": "npm run docker:test && jest --watch",
+    "test:coverage": "npm run docker:test && jest --coverage"
   },
   "dependencies": {
     "aws-cdk-lib": "2.121.1",

@@ -16,14 +16,14 @@ export class AuthController {
   ) {}
 
   async CreateUser(event: APIGatewayEvent) {
-    await new CreateUserUseCase(this.authRepository, this.emailService).execute(event);
+    return await new CreateUserUseCase(this.authRepository, this.emailService).execute(event);
   }
 
   async VerifyUser(event: APIGatewayEvent) {
-    await new VerifyUserUseCase(this.userRepository, this.authRepository).execute(event);
+    return await new VerifyUserUseCase(this.userRepository, this.authRepository).execute(event);
   }
 
   async LoginUser(event: APIGatewayEvent) {
-    await new LoginUserUseCase(this.userRepository).execute(event);
+    return await new LoginUserUseCase(this.userRepository).execute(event);
   }
 }
