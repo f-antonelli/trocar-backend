@@ -9,17 +9,12 @@ import { ErrorResponse } from './presentation/utils';
 const service = new UserService(new UserRepositoryImpl(new PgUserDatasource()));
 
 export const handler = (event: APIGatewayProxyEvent) => {
-  const isRoot = event.pathParameters === null;
-
-  switch (event.httpMethod.toLowerCase()) {
-    case 'post':
-      if (isRoot) {
-        return service.CreateUser(event);
-      }
-      break;
-    case 'get':
-      return isRoot ? service.GetUsers(event) : service.GetUser(event);
+  switch (event.path) {
+    case '/auth/login':
+      return service.LoginUser(event);
+    case '/auth/signup':
+      return service.CreateUser(event);
+    default:
+      return ErrorResponse(404, 'Requested method not allowed!');
   }
-
-  return ErrorResponse(404, 'Requested method not allowed!');
 };

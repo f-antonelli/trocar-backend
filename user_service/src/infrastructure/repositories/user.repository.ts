@@ -5,17 +5,22 @@ import { UserRepository } from '../../domain/repositories/user.repository';
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly userDatasource: UserDatasource) {}
 
-  create(user: UserEntity): Promise<UserEntity | void> {
-    return this.userDatasource.create(user);
+  Create(user: UserEntity): Promise<UserEntity | void> {
+    return this.userDatasource.Create(user);
   }
 
-  getUsers(limit: number, page: number): Promise<UserEntity[]> {
-    return this.userDatasource.getUsers(limit, page);
+  GetUsers(limit: number, page: number): Promise<UserEntity[] | null> {
+    return this.userDatasource.GetUsers(limit, page);
   }
 
-  getUser(id: number): Promise<UserEntity> {
-    return this.userDatasource.getUser(id);
+  GetUserById(id: number): Promise<UserEntity | null> {
+    return this.userDatasource.GetUserById(id);
   }
+
+  GetUserByEmail(email: string): Promise<UserEntity | null> {
+    return this.userDatasource.GetUserByEmail(email);
+  }
+
   update(id: Number): Promise<UserEntity[]> {
     throw new Error('Method not implemented.');
   }
