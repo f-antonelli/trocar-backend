@@ -38,6 +38,14 @@ export class ApiGatewayStack extends Construct {
       child: [
         { name: 'login', methods: ['POST'] },
         { name: 'signup', methods: ['POST'] },
+        {
+          name: 'verify',
+          methods: ['GET'],
+          child: {
+            name: '{token}',
+            methods: ['GET'],
+          },
+        },
       ],
     });
   }

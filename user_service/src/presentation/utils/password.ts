@@ -31,7 +31,7 @@ export class Password {
   static VerifyToken(token: string): ITokenPayload | false {
     try {
       if (token !== '') {
-        const payload = verify(token.split(' ')[1], process.env.APP_SECRET!);
+        const payload = verify(token, process.env.APP_SECRET!);
 
         return payload as ITokenPayload;
       }

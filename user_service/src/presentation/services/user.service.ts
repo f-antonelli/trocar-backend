@@ -45,16 +45,18 @@ export class UserService {
   }
 
   async VerifyUser(event: APIGatewayEvent) {
-    const token = event.pathParameters!.token!;
+    const token = event.queryStringParameters!.token!;
 
     try {
       const payload = Password.VerifyToken(token);
       if (!payload) return ErrorResponse(403, 'Authorization failed!');
 
-      const data = await this.userRepository.GetUserById(payload.id);
+      const data = await this.userRepository.GetUserById(+payload.id);
       if (!data) return ErrorResponse(404, 'No user was found with this id.');
 
-      // TODO: update user
+      const userVerified = await this.userRepository.UpdateVerifyUser(data.id!);
+      if (!userVerified)
+        return ErrorResponse(400, 'The user could not be verified. Please request another code.');
 
       return SuccessResponse(201, { message: 'User verified!' });
     } catch (error) {

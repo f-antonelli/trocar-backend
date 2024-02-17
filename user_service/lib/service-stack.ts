@@ -30,6 +30,7 @@ export class ServiceStack extends Construct {
         MAILER_SERVICE: config.MAILER_SERVICE,
         MAILER_EMAIL: config.MAILER_EMAIL,
         MAILER_SECRET_KEY: config.MAILER_SECRET_KEY,
+        URL_VERIFY: config.URL_VERIFY,
       },
       runtime: Runtime.NODEJS_18_X,
       timeout: Duration.seconds(10),

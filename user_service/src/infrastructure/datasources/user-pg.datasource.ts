@@ -60,6 +60,20 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
     return null;
   }
 
+  async UpdateVerifyUser(userId: number): Promise<UserEntity | null> {
+    const queryString =
+      'UPDATE users SET is_active = true WHERE id = $1 AND is_active = false RETURNING *';
+
+    const values = [userId];
+    const result = await this.executeQuery(queryString, values);
+
+    if (result.rowCount! > 0) {
+      return result.rows[0] as UserEntity;
+    }
+
+    return null;
+  }
+
   update(id: Number): Promise<UserEntity[]> {
     throw new Error('Method not implemented.');
   }

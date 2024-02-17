@@ -14,6 +14,7 @@ export type ConfigProps = {
   MAILER_SERVICE: string;
   MAILER_EMAIL: string;
   MAILER_SECRET_KEY: string;
+  URL_VERIFY: string;
 };
 
 export const getConfig = (): ConfigProps => ({
@@ -27,4 +28,5 @@ export const getConfig = (): ConfigProps => ({
   MAILER_SERVICE: process.env.MAILER_SERVICE || '',
   MAILER_EMAIL: process.env.MAILER_EMAIL || '',
   MAILER_SECRET_KEY: process.env.MAILER_SECRET_KEY || '',
+  URL_VERIFY: process.env.URL_VERIFY || '',
 });

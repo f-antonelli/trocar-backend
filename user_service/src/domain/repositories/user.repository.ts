@@ -5,6 +5,7 @@ export abstract class UserRepository {
   abstract GetUsers(limit: number, page: number): Promise<UserEntity[] | null>;
   abstract GetUserById(id: number): Promise<UserEntity | null>;
   abstract GetUserByEmail(email: string): Promise<UserEntity | null>;
+  abstract UpdateVerifyUser(userId: number): Promise<UserEntity | null>;
   abstract update(id: Number): Promise<UserEntity[]>;
   abstract delete(id: Number): Promise<UserEntity[]>;
 }
