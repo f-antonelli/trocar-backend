@@ -13,11 +13,6 @@ export const handler = (event: APIGatewayProxyEvent) => {
   const isRoot = event.pathParameters === null;
 
   switch (event.httpMethod.toLowerCase()) {
-    case 'post':
-      if (isRoot) {
-        return service.CreateUser(event);
-      }
-      break;
     case 'get':
       return isRoot ? service.GetUsers(event) : service.GetUser(event);
   }
