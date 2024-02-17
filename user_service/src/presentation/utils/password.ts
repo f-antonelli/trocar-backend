@@ -1,5 +1,7 @@
 import { genSalt, hash, compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
+
+import { ITokenPayload } from '../interfaces/token-payload.interface';
 
 export class Password {
   private static async GetSalt(): Promise<string> {
@@ -24,5 +26,20 @@ export class Password {
         expiresIn: process.env.EXPIRES,
       }
     );
+  }
+
+  static VerifyToken(token: string): ITokenPayload | false {
+    try {
+      if (token !== '') {
+        const payload = verify(token.split(' ')[1], process.env.APP_SECRET!);
+
+        return payload as ITokenPayload;
+      }
+
+      return false;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }

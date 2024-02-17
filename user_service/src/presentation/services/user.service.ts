@@ -3,10 +3,15 @@ import { plainToInstance } from 'class-transformer';
 
 import { CreateUserDTO, LoginUserDTO } from '../../domain/dtos/users';
 import { UserRepository } from '../../domain/repositories/user.repository';
+import { EmailService } from '../../infrastructure/services/email.service';
+import { SendEmailVerify } from '../../infrastructure/use-cases/email/send-email-verify';
 import { AppValidation, ErrorResponse, Password, SuccessResponse } from '../utils';
 
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly emailService: EmailService
+  ) {}
 
   async CreateUser(event: APIGatewayEvent) {
     try {
@@ -23,7 +28,35 @@ export class UserService {
 
       if (!data) return ErrorResponse(500, 'Couldnt create user, please try again.');
 
+      // send email verification
+      const token = Password.GetToken({
+        email: data.email,
+        role: data.role,
+        id: data.id,
+      });
+      const sentEmail = await new SendEmailVerify(this.emailService).execute(data.email, token);
+      if (!sentEmail) throw Error('Couldnt sent email.');
+
       return SuccessResponse(201, data);
+    } catch (error) {
+      console.log(error);
+      return ErrorResponse(500, error);
+    }
+  }
+
+  async VerifyUser(event: APIGatewayEvent) {
+    const token = event.pathParameters!.token!;
+
+    try {
+      const payload = Password.VerifyToken(token);
+      if (!payload) return ErrorResponse(403, 'Authorization failed!');
+
+      const data = await this.userRepository.GetUserById(payload.id);
+      if (!data) return ErrorResponse(404, 'No user was found with this id.');
+
+      // TODO: update user
+
+      return SuccessResponse(201, { message: 'User verified!' });
     } catch (error) {
       console.log(error);
       return ErrorResponse(500, error);

@@ -11,6 +11,9 @@ export type ConfigProps = {
   POSTGRES_PORT: string;
   APP_SECRET: string;
   EXPIRES: string;
+  MAILER_SERVICE: string;
+  MAILER_EMAIL: string;
+  MAILER_SECRET_KEY: string;
 };
 
 export const getConfig = (): ConfigProps => ({
@@ -21,4 +24,7 @@ export const getConfig = (): ConfigProps => ({
   POSTGRES_PORT: process.env.POSTGRES_PORT || '5432',
   APP_SECRET: process.env.APP_SECRET || '',
   EXPIRES: process.env.EXPIRES || '',
+  MAILER_SERVICE: process.env.MAILER_SERVICE || '',
+  MAILER_EMAIL: process.env.MAILER_EMAIL || '',
+  MAILER_SECRET_KEY: process.env.MAILER_SECRET_KEY || '',
 });
