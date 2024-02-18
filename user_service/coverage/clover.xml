@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708212223727" clover="3.2.0">
-  <project timestamp="1708212223728" name="All files">
+<coverage generated="1708213872032" clover="3.2.0">
+  <project timestamp="1708213872033" name="All files">
     <metrics statements="303" coveredstatements="290" conditionals="51" coveredconditionals="43" methods="22" coveredmethods="22" elements="376" coveredelements="355" complexity="0" loc="303" ncloc="303" packages="4" files="12" classes="12"/>
     <package name="domain.dtos.users">
       <metrics statements="30" coveredstatements="30" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>

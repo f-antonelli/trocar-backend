@@ -12,3 +12,4 @@ cdk.out
 postgres
 postgres-test
 database.json
+coverage
