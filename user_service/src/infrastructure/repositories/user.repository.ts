@@ -1,4 +1,5 @@
 import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UpdateUserDTO } from '../../domain/dtos/users';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { UserRepository } from '../../domain/repositories/user.repository';
 
@@ -15,6 +16,10 @@ export class UserRepositoryImpl implements UserRepository {
 
   GetUserByEmail(email: string): Promise<UserEntity | null> {
     return this.userDatasource.GetUserByEmail(email);
+  }
+
+  UpdateUser(id: number, userData: UpdateUserDTO): Promise<UserEntity | null> {
+    return this.userDatasource.UpdateUser(id, userData);
   }
 
   update(id: Number): Promise<UserEntity[]> {

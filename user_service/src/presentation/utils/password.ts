@@ -30,6 +30,8 @@ export class Password {
 
   static VerifyToken(token: string): ITokenPayload | false {
     try {
+      if (token.startsWith('Bearer ')) token = token.split(' ')[1];
+
       if (token !== '') {
         const payload = verify(token, process.env.APP_SECRET!);
 

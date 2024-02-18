@@ -1,4 +1,5 @@
 import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UpdateUserDTO } from '../../domain/dtos/users';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { DBOperation } from '../data/pg/db-operation';
 
@@ -37,6 +38,21 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
     const queryString = 'SELECT * FROM users WHERE email = $1';
 
     const values = [email];
+    const result = await this.executeQuery(queryString, values);
+
+    if (result.rowCount! > 0) {
+      return result.rows[0] as UserEntity;
+    }
+
+    return null;
+  }
+
+  async UpdateUser(id: number, userData: UpdateUserDTO): Promise<UserEntity | null> {
+    const { username, email, image_url } = userData;
+    const queryString =
+      'UPDATE users SET username=$1, email=$2, image_url=$3 WHERE id=$4 RETURNING *';
+
+    const values = [username, email, image_url, id];
     const result = await this.executeQuery(queryString, values);
 
     if (result.rowCount! > 0) {
