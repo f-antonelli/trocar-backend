@@ -90,7 +90,7 @@ shrinkwrap.json
 
 # Build outputs
 dist
-lib
+
 
 # Prettier reformats code blocks inside Markdown, which affects rendered output
 *.md

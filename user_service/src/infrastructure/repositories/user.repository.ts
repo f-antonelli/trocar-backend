@@ -1,25 +1,28 @@
 import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UpdateUserDTO } from '../../domain/dtos/users';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { UserRepository } from '../../domain/repositories/user.repository';
 
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly userDatasource: UserDatasource) {}
 
-  create(user: UserEntity): Promise<UserEntity | void> {
-    return this.userDatasource.create(user);
+  GetUsers(limit: number, page: number): Promise<UserEntity[] | null> {
+    return this.userDatasource.GetUsers(limit, page);
   }
 
-  getUsers(limit: number, page: number): Promise<UserEntity[]> {
-    return this.userDatasource.getUsers(limit, page);
+  GetUserById(id: number): Promise<UserEntity | null> {
+    return this.userDatasource.GetUserById(id);
   }
 
-  getUser(id: number): Promise<UserEntity> {
-    return this.userDatasource.getUser(id);
+  GetUserByEmail(email: string): Promise<UserEntity | null> {
+    return this.userDatasource.GetUserByEmail(email);
   }
-  update(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+
+  UpdateUser(id: number, userData: UpdateUserDTO): Promise<UserEntity | null> {
+    return this.userDatasource.UpdateUser(id, userData);
   }
-  delete(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+
+  DeleteUser(id: number): Promise<UserEntity | null> {
+    return this.userDatasource.DeleteUser(id);
   }
 }

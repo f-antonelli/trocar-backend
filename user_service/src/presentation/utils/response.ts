@@ -1,8 +1,4 @@
-export interface Response {
-  statusCode: Number;
-  headers: Object;
-  body: string;
-}
+import { IResponse } from '../interfaces';
 
 interface ValidationError {
   constraints: { [key: string]: string };
@@ -13,7 +9,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const formatResponse = (statusCode: number, error: unknown, data: unknown): Response => {
+const formatResponse = (statusCode: number, error: unknown, data: unknown): IResponse => {
   if (data) {
     return {
       statusCode,

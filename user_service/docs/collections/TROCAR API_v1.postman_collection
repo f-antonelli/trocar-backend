@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "52f429b1-a991-45db-aada-66d76f2b6ae6",
+		"name": "TROCAR API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19195250"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"fede123\",\r\n    \"email\": \"antonelli.fd@gmail.com\",\r\n    \"image_url\": \"asd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudG9uZWxsaS5mZEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlkIjoiMSIsImlhdCI6MTcwODI5NDAyOSwiZXhwIjoxNzEwODg2MDI5fQ.67FEpJcQwEnT5WL7PHqhu7ODWUWdxS5S7dcgvXOAwLY",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"antonelli.fd@gmail.com\",\r\n    \"password\": \"213Aa12dSd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/auth/verify?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudG9uZWxsaS5mZEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlkIjoiNyIsImlhdCI6MTcwODE4ODI0MCwiZXhwIjoxNzEwNzgwMjQwfQ.ow8py-pnBnqIcOU9lOGQ-HgQe6Sm1hnRIuw2v_QaaaM",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudG9uZWxsaS5mZEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlkIjoiNyIsImlhdCI6MTcwODE4ODI0MCwiZXhwIjoxNzEwNzgwMjQwfQ.ow8py-pnBnqIcOU9lOGQ-HgQe6Sm1hnRIuw2v_QaaaM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"fede\",\r\n    \"email\": \"antonelli.fd@gmail.com\",\r\n    \"password\": \"213Aa12dSd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudG9uZWxsaS5mZEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlkIjoiMSIsImlhdCI6MTcwODI5NDAyOSwiZXhwIjoxNzEwODg2MDI5fQ.67FEpJcQwEnT5WL7PHqhu7ODWUWdxS5S7dcgvXOAwLY",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

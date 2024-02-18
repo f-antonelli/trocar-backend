@@ -6,21 +6,20 @@ import { ConfigProps } from './config';
 import { ServiceStack } from './service-stack';
 
 export type UserServiceStackProps = cdk.StackProps & {
-  config: Readonly<ConfigProps>
-}
+  config: Readonly<ConfigProps>;
+};
 
 export class UserServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: UserServiceStackProps) {
     super(scope, id, props);
 
-    const { config } = props
+    const { config } = props;
 
-    const {
+    const { userService, authService } = new ServiceStack(this, 'UserService', { config });
+
+    new ApiGatewayStack(this, 'UserApiGateway', {
       userService,
-    } = new ServiceStack(this, "UserService", { config });
-
-    new ApiGatewayStack(this, "UserApiGateway", {
-      userService
+      authService,
     });
   }
 }

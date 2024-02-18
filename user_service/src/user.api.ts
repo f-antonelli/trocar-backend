@@ -1,25 +1,25 @@
 import 'reflect-metadata';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import { APIGatewayEvent } from 'aws-lambda';
 
 import { PgUserDatasource } from './infrastructure/datasources/user-pg.datasource';
 import { UserRepositoryImpl } from './infrastructure/repositories/user.repository';
-import { UserService } from './presentation/services/user.service';
+import { UserController } from './presentation/controllers/user.controller';
 import { ErrorResponse } from './presentation/utils';
 
-const service = new UserService(new UserRepositoryImpl(new PgUserDatasource()));
+const controller = new UserController(new UserRepositoryImpl(new PgUserDatasource()));
 
-export const handler = (event: APIGatewayProxyEvent) => {
+export const handler = (event: APIGatewayEvent) => {
   const isRoot = event.pathParameters === null;
 
   switch (event.httpMethod.toLowerCase()) {
-    case 'post':
-      if (isRoot) {
-        return service.CreateUser(event);
-      }
-      break;
     case 'get':
-      return isRoot ? service.getUsers(event) : service.getUser(event);
+      return isRoot ? controller.GetUsers(event) : controller.GetUser(event);
+    case 'put':
+      return controller.UpdateUser(event);
+    case 'delete':
+      if (!isRoot) {
+        return controller.DeleteUser(event);
+      }
   }
-
   return ErrorResponse(404, 'Requested method not allowed!');
 };

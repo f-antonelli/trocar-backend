@@ -7,6 +7,9 @@ node_modules
 .cdk.staging
 cdk.out
 .env
+.env.test
 
-/postgres
+postgres
+postgres-test
 database.json
+coverage

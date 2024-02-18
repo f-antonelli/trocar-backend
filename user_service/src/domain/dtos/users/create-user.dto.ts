@@ -14,5 +14,5 @@ export class CreateUserDTO {
   @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'Password must have a Uppercase, lowercase letter and a number',
   })
-  public password: string;
+  password: string;
 }
