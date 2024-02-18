@@ -6,6 +6,5 @@ export abstract class UserDatasource {
   abstract GetUserById(id: number): Promise<UserEntity | null>;
   abstract GetUserByEmail(email: string): Promise<UserEntity | null>;
   abstract UpdateUser(id: number, userData: UpdateUserDTO): Promise<UserEntity | null>;
-  abstract update(id: Number): Promise<UserEntity[]>;
-  abstract delete(id: Number): Promise<UserEntity[]>;
+  abstract DeleteUser(id: number): Promise<UserEntity | null>;
 }

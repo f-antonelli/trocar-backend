@@ -62,10 +62,16 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
     return null;
   }
 
-  update(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
-  }
-  delete(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+  async DeleteUser(id: Number): Promise<UserEntity | null> {
+    const queryString = 'DELETE FROM users WHERE id = $1';
+
+    const values = [id];
+    const result = await this.executeQuery(queryString, values);
+
+    if (result.rowCount! > 0) {
+      return result.rows[0] as UserEntity;
+    }
+
+    return null;
   }
 }

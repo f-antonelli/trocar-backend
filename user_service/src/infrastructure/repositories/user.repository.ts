@@ -22,10 +22,7 @@ export class UserRepositoryImpl implements UserRepository {
     return this.userDatasource.UpdateUser(id, userData);
   }
 
-  update(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
-  }
-  delete(id: Number): Promise<UserEntity[]> {
-    throw new Error('Method not implemented.');
+  DeleteUser(id: number): Promise<UserEntity | null> {
+    return this.userDatasource.DeleteUser(id);
   }
 }

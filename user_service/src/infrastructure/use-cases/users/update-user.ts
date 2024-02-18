@@ -13,7 +13,6 @@ export class UpdateUserUseCase implements IUseCase {
   public async execute(event: APIGatewayEvent): Promise<IResponse> {
     try {
       const payload = authMiddleware(event);
-
       if ((payload as IResponse).statusCode) return payload as IResponse;
 
       const input = plainToInstance(UpdateUserDTO, JSON.parse(event.body!));

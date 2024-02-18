@@ -21,4 +21,8 @@ export class UserController {
   async UpdateUser(event: APIGatewayEvent) {
     return await new UpdateUserUseCase(this.userRepository).execute(event);
   }
+
+  async DeleteUser(event: APIGatewayEvent) {
+    return await new UpdateUserUseCase(this.userRepository).execute(event);
+  }
 }
