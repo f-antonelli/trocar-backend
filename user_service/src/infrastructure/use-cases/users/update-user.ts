@@ -22,6 +22,8 @@ export class UpdateUserUseCase implements IUseCase {
       const data = await this.userRepository.UpdateUser(+(payload as ITokenPayload).id, input);
       if (!data) return ErrorResponse(500, 'Couldnt update user, please try again.');
 
+      if ('password' in data) delete data.password;
+
       return SuccessResponse(201, data);
     } catch (error) {
       console.log(error);

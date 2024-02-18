@@ -34,6 +34,8 @@ export class CreateUserUseCase implements IUseCase {
 
       if (!data) return ErrorResponse(500, 'Couldnt create user, please try again.');
 
+      if ('password' in data) delete data.password;
+
       // send email verification
       const token = Password.GetToken({
         email: data.email,

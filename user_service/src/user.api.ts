@@ -15,8 +15,10 @@ export const handler = (event: APIGatewayEvent) => {
     case 'get':
       return isRoot ? controller.GetUsers(event) : controller.GetUser(event);
     case 'put':
+      return controller.UpdateUser(event);
+    case 'delete':
       if (!isRoot) {
-        return controller.UpdateUser(event);
+        return controller.DeleteUser(event);
       }
   }
   return ErrorResponse(404, 'Requested method not allowed!');

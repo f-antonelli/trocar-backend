@@ -19,6 +19,8 @@ export class DeleteUserUseCase implements IUseCase {
       const data = await this.userRepository.DeleteUser(parseInt(userId));
       if (!data) return ErrorResponse(404, 'No user was found with this id.');
 
+      if ('password' in data) delete data.password;
+
       return SuccessResponse(200, data);
     } catch (error) {
       console.log(error);

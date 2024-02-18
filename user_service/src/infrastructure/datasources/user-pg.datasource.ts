@@ -8,7 +8,7 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
     const offset = (page - 1) * limit;
 
     const queryString = `
-      SELECT * FROM users ORDER BY id LIMIT $1 OFFSET $2
+      SELECT id, username, email, image_url, is_active, role FROM users ORDER BY id LIMIT $1 OFFSET $2
     `;
 
     const values = [limit, offset];
@@ -22,7 +22,8 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
   }
 
   async GetUserById(id: number): Promise<UserEntity | null> {
-    const queryString = 'SELECT * FROM users WHERE id = $1';
+    const queryString =
+      'SELECT id, username, email, image_url, is_active, role, created_at, updated_at FROM users WHERE id = $1';
 
     const values = [id];
     const result = await this.executeQuery(queryString, values);
@@ -35,7 +36,8 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
   }
 
   async GetUserByEmail(email: string): Promise<UserEntity | null> {
-    const queryString = 'SELECT * FROM users WHERE email = $1';
+    const queryString =
+      'SELECT id, username, email, image_url, is_active, role, created_at, updated_at FROM users WHERE email = $1';
 
     const values = [email];
     const result = await this.executeQuery(queryString, values);
@@ -50,7 +52,7 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
   async UpdateUser(id: number, userData: UpdateUserDTO): Promise<UserEntity | null> {
     const { username, email, image_url } = userData;
     const queryString =
-      'UPDATE users SET username=$1, email=$2, image_url=$3 WHERE id=$4 RETURNING *';
+      'UPDATE users SET username=$1, email=$2, image_url=$3, updated_at = NOW() WHERE id=$4 RETURNING *';
 
     const values = [username, email, image_url, id];
     const result = await this.executeQuery(queryString, values);
