@@ -1,3 +1,5 @@
+import { Country } from '../enums/country.enum';
+
 export interface ProfileEntity {
   id?: number;
   name: string;
@@ -5,12 +7,12 @@ export interface ProfileEntity {
   phone: string;
   address_1: string;
   address_2?: string;
-  country: string;
+  country: Country;
   city: string;
   zip_code: string;
   user_score?: GLfloat;
-  wish_list?: string[];
-  references?: string[];
+  wish_list?: number[];
+  references?: number[];
   created_at?: Date;
   updated_at?: Date;
 }

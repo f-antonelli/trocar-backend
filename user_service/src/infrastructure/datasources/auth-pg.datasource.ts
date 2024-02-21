@@ -1,4 +1,4 @@
-import { AuthDatasource } from '../../domain/datasources/auth.datasource';
+import { AuthDatasource } from '../../domain/datasources';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { DBOperation } from '../data/pg/db-operation';
 

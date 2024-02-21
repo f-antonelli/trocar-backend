@@ -1,4 +1,4 @@
-import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UserDatasource } from '../../domain/datasources';
 import { UpdateUserDTO } from '../../domain/dtos/users';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { DBOperation } from '../data/pg/db-operation';
