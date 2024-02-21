@@ -1,14 +1,21 @@
 import { APIGatewayEvent } from 'aws-lambda';
 
-import { UserRepository } from '../../domain/repositories/user.repository';
+import { ProfileRepository, UserRepository } from '../../domain/repositories';
 import {
+  CreateProfileUseCase,
+  GetProfileUseCase,
   GetUserUseCase,
   GetUsersUseCase,
+  UpdateProfileUseCase,
   UpdateUserUseCase,
+  DeleteUserUseCase,
 } from '../../infrastructure/use-cases/users';
 
 export class UserController {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly profileRepository: ProfileRepository
+  ) {}
 
   async GetUsers(event: APIGatewayEvent) {
     return await new GetUsersUseCase(this.userRepository).execute(event);
@@ -23,6 +30,19 @@ export class UserController {
   }
 
   async DeleteUser(event: APIGatewayEvent) {
-    return await new UpdateUserUseCase(this.userRepository).execute(event);
+    return await new DeleteUserUseCase(this.userRepository).execute(event);
+  }
+
+  // profiles section
+  async CreateProfile(event: APIGatewayEvent) {
+    return await new CreateProfileUseCase(this.profileRepository).execute(event);
+  }
+
+  async GetProfile(event: APIGatewayEvent) {
+    return await new GetProfileUseCase(this.profileRepository).execute(event);
+  }
+
+  async UpdateProfile(event: APIGatewayEvent) {
+    return await new UpdateProfileUseCase(this.profileRepository).execute(event);
   }
 }

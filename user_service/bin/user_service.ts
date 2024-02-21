@@ -8,6 +8,7 @@ import { UserServiceStack } from '../lib/user_service-stack';
 const config = getConfig();
 
 const app = new cdk.App();
+
 new UserServiceStack(app, 'UserServiceStack', {
   env: {},
   config,

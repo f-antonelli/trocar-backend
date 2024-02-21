@@ -1,3 +1,5 @@
+import { Role } from '../enums/user-role.enum';
+
 export interface UserEntity {
   id?: number;
   username: string;
@@ -5,7 +7,7 @@ export interface UserEntity {
   password?: string;
   image_url?: string;
   is_active?: boolean;
-  role?: string;
-  created_at?: string;
-  updated_at?: string;
+  role?: Role;
+  created_at?: Date;
+  updated_at?: Date;
 }

@@ -1,4 +1,4 @@
-import { UserDatasource } from '../../domain/datasources/user.datasource';
+import { UserDatasource } from '../../domain/datasources';
 import { UpdateUserDTO } from '../../domain/dtos/users';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { DBOperation } from '../data/pg/db-operation';
@@ -36,8 +36,7 @@ export class PgUserDatasource extends DBOperation implements UserDatasource {
   }
 
   async GetUserByEmail(email: string): Promise<UserEntity | null> {
-    const queryString =
-      'SELECT id, username, email, image_url, is_active, role, created_at, updated_at FROM users WHERE email = $1';
+    const queryString = 'SELECT * FROM users WHERE email = $1';
 
     const values = [email];
     const result = await this.executeQuery(queryString, values);
