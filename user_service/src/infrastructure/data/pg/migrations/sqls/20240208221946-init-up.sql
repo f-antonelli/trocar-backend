@@ -17,16 +17,18 @@ CREATE TABLE "users_profile" (
     "id"            bigserial PRIMARY KEY,
     "address_1"     varchar(100) NOT NULL,
     "address_2"     varchar(100) DEFAULT NULL,
-    "country"       varchar(20) NOT NULL,
+    "country"       country_enum,
     "zip_code"      varchar(10) NOT NULL,
-    "city"          country_enum,
+    "city"          varchar(30) NOT NULL,
     "name"          varchar(50) NOT NULL,
     "surname"       varchar(50) NOT NULL,
     "phone"         varchar(20) NOT NULL,
-    "user_score"    float,
+    "user_score"    float NOT NULL,
     "wish_list"     integer[] DEFAULT ARRAY[]::integer[] NOT NULL,
-    "references"    integer[] DEFAULT ARRAY[]::integer[] NOT NULL,
+    "ref"           integer[] DEFAULT ARRAY[]::integer[] NOT NULL,
     "user_id"       bigint,
+    "created_at"    timestamptz NOT NULL DEFAULT (now()),
+    "updated_at"    timestamptz,
     CONSTRAINT "fk_user_address_user_id" FOREIGN KEY ("user_id") REFERENCES "users"("id")
 );
 

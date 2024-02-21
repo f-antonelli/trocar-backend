@@ -12,7 +12,7 @@ export interface ProfileEntity {
   zip_code: string;
   user_score?: GLfloat;
   wish_list?: number[];
-  references?: number[];
+  ref?: number[];
   created_at?: Date;
   updated_at?: Date;
 }

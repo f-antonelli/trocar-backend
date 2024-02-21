@@ -7,10 +7,25 @@ export class PgProfileDatasource extends DBOperation implements ProfileDatasourc
   async CreateProfile(userId: number, profile: ProfileEntity): Promise<ProfileEntity | void> {
     const { name, surname, address_1, city, country, phone, zip_code, address_2 = null } = profile;
 
-    const queryString =
-      'INSERT INTO users_profile( name, surname, address_1, city, country, phone, zip_code, address_2, user_id ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 ) RETURNING *';
+    const queryString = `INSERT INTO users_profile( name, surname, address_1, city, country, phone, zip_code, address_2, user_score, wish_list, ref, user_id )
+       VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12 ) 
+       RETURNING *
+       `;
 
-    const values = [name, surname, address_1, city, country, phone, zip_code, address_2, userId];
+    const values = [
+      name,
+      surname,
+      address_1,
+      city,
+      country,
+      phone,
+      zip_code,
+      address_2,
+      0,
+      [],
+      [],
+      userId,
+    ];
     const result = await this.executeQuery(queryString, values);
 
     if (result && result.rowCount! > 0) {

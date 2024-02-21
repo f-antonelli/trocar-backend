@@ -24,7 +24,7 @@ export class LoginUserUseCase implements IUseCase {
       if (!data)
         return ErrorResponse(404, 'Invalid credentials. Please check your email and password.');
 
-      const verified = await Password.ValidatePassword(input.password, data.password);
+      const verified = await Password.ValidatePassword(input.password, data.password!);
 
       if (!verified)
         return ErrorResponse(404, 'Invalid credentials. Please check your email and password.');
