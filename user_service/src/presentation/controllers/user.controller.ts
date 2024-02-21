@@ -3,9 +3,12 @@ import { APIGatewayEvent } from 'aws-lambda';
 import { ProfileRepository, UserRepository } from '../../domain/repositories';
 import {
   CreateProfileUseCase,
+  GetProfileUseCase,
   GetUserUseCase,
   GetUsersUseCase,
+  UpdateProfileUseCase,
   UpdateUserUseCase,
+  DeleteUserUseCase,
 } from '../../infrastructure/use-cases/users';
 
 export class UserController {
@@ -27,7 +30,7 @@ export class UserController {
   }
 
   async DeleteUser(event: APIGatewayEvent) {
-    return await new UpdateUserUseCase(this.userRepository).execute(event);
+    return await new DeleteUserUseCase(this.userRepository).execute(event);
   }
 
   // profiles section
@@ -36,10 +39,10 @@ export class UserController {
   }
 
   async GetProfile(event: APIGatewayEvent) {
-    return await new CreateProfileUseCase(this.profileRepository).execute(event);
+    return await new GetProfileUseCase(this.profileRepository).execute(event);
   }
 
   async UpdateProfile(event: APIGatewayEvent) {
-    return await new CreateProfileUseCase(this.profileRepository).execute(event);
+    return await new UpdateProfileUseCase(this.profileRepository).execute(event);
   }
 }
