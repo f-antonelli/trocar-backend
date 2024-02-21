@@ -26,10 +26,10 @@ export class ApiGatewayStack extends Construct {
     this.createEndpoints(userService, apgw, {
       name: 'users',
       methods: ['GET', 'POST'],
-      child: {
-        name: '{id}',
-        methods: ['GET', 'PUT', 'DELETE'],
-      },
+      child: [
+        { name: '{id}', methods: ['GET', 'PUT', 'DELETE'] },
+        { name: 'profile', methods: ['POST', 'GET', 'PUT'] },
+      ],
     });
 
     this.createEndpoints(authService, apgw, {

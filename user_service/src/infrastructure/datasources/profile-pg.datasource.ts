@@ -4,13 +4,13 @@ import { ProfileEntity } from '../../domain/entities/profile.entity';
 import { DBOperation } from '../data/pg/db-operation';
 
 export class PgProfileDatasource extends DBOperation implements ProfileDatasource {
-  async CreateProfile(profile: ProfileEntity): Promise<ProfileEntity | void> {
+  async CreateProfile(userId: number, profile: ProfileEntity): Promise<ProfileEntity | void> {
     const { name, surname, address_1, city, country, phone, zip_code, address_2 = null } = profile;
 
     const queryString =
-      'INSERT INTO users_profile( name, surname, address_1, city, country, phone, zip_code, address_2 ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8 ) RETURNING *';
+      'INSERT INTO users_profile( name, surname, address_1, city, country, phone, zip_code, address_2, user_id ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 ) RETURNING *';
 
-    const values = [name, surname, address_1, city, country, phone, zip_code, address_2];
+    const values = [name, surname, address_1, city, country, phone, zip_code, address_2, userId];
     const result = await this.executeQuery(queryString, values);
 
     if (result && result.rowCount! > 0) {
